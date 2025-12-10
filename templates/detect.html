@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="detect-hero fade-in">
+    <h1>Start Your Eye Control Journey</h1>
+    <p>Experience the future of human-computer interaction</p>
+</section>
+
+<main class="content">
+    <div class="detect-container fade-in">
+        <div class="detect-info">
+            <h2>Ready to Begin?</h2>
+            <p>Click the button below to launch the eye control system. Ensure your webcam is connected and you're in a well-lit environment.</p>
+            
+            <div class="requirements">
+                <h3>System Requirements</h3>
+                <ul>
+                    <li>• Webcam (720p or higher recommended)</li>
+                    <li>• Windows 10/11, macOS 10.14+, or Ubuntu 18.04+</li>
+                    <li>• 4GB RAM minimum</li>
+                    <li>• Python 3.8+ (automatically installed)</li>
+                </ul>
+            </div>
+            
+            <a href="/detect" class="launch-button" onclick="showLoading()">
+                <span class="button-text">Launch Eye Control</span>
+                <span class="button-icon">🚀</span>
+            </a>
+            
+            <div id="loading" style="display: none; margin-top: 20px;">
+                <div class="spinner"></div>
+                <p>Initializing camera and calibration...</p>
+            </div>
+        </div>
+        
+        <div class="detect-preview fade-in" style="animation-delay: 0.3s">
+            <div class="preview-card">
+                <h3>Live Preview</h3>
+                <div class="preview-placeholder">
+                    <div class="eye-animation">
+                        <div class="eye-left"></div>
+                        <div class="eye-right"></div>
+                    </div>
+                    <p>Camera feed will appear here</p>
+                </div>
+                <div class="preview-stats">
+                    <div class="stat">
+                        <span class="stat-value">0ms</span>
+                        <span class="stat-label">Latency</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">99.9%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">60</span>
+                        <span class="stat-label">FPS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+.detect-hero {
+    padding: 6rem 2rem 3rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.detect-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.launch-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1.2rem 2.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.launch-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+<script>
+function showLoading() {
+    document.getElementById('loading').style.display = 'block';
+    setTimeout(() => {
+        window.location.href = '/detect';
+    }, 2000);
+}
+</script>
+
+{% endblock %}

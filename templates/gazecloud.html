@@ -1,0 +1,566 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Banner for GazeCloud -->
+<section class="hero-banner">
+    <div class="banner-with-image">
+        <div class="banner-image-container">
+            <img src="/static/images/bg.jpg" alt="GazeCloud Eye Tracking Platform" class="banner-image">
+            <div class="banner-overlay">
+                <div class="banner-content container">
+                    <h1 class="banner-title">GazeCloud</h1>
+                    <p class="banner-subtitle">Enterprise-Grade Eye Tracking API Platform</p>
+                    <p class="banner-description">Cloud-based eye tracking infrastructure for developers, researchers, and businesses. Integrate gaze analytics into your applications with our powerful API.</p>
+                    <div class="banner-cta">
+                        <a href="#api-keys" class="cta-button">Get API Keys</a>
+                        <a href="#demo" class="cta-button" style="margin-left: 20px; background: linear-gradient(135deg, #20c997 0%, #0ca678 100%);">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- API Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header">
+            <h2>GazeCloud API Features</h2>
+            <p>Powerful eye tracking capabilities delivered through RESTful APIs</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="feature-title">RESTful API</h3>
+                <p class="feature-description">Simple HTTP endpoints for real-time gaze tracking. JSON responses with x, y coordinates, confidence scores, and gaze events.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">Real-time Processing</h3>
+                <p class="feature-description">Low-latency processing with WebSocket support. Get gaze data streams with &lt;50ms latency for interactive applications.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3 class="feature-title">Cloud Infrastructure</h3>
+                <p class="feature-description">Scalable cloud processing. No local GPU required. Process thousands of streams simultaneously.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Security & Privacy</h3>
+                <p class="feature-description">GDPR compliant. Data encryption at rest and in transit. Optional on-premise deployment available.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- API Documentation Section -->
+<section class="main-content">
+    <div class="container">
+        <div class="section-header">
+            <h2 id="api-keys">API Documentation</h2>
+            <p>Integrate eye tracking into your applications with our comprehensive API</p>
+        </div>
+        
+        <!-- API Key Management with Dropdown -->
+        <div class="api-keys-section" style="margin: 3rem 0;">
+            <h3 style="margin-bottom: 1.5rem; color: var(--dark);">API Key Management</h3>
+            
+            <div class="api-key-controls" style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <!-- Dropdown for Selecting API Environment -->
+                <div class="dropdown-group" style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--dark);">
+                        Select API Environment:
+                    </label>
+                    <div class="dropdown-container" style="position: relative; display: inline-block; width: 300px;">
+                        <select id="api-environment" class="api-dropdown" 
+                                style="width: 100%; padding: 1rem 1.5rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 10px; background: white; color: var(--dark); cursor: pointer; appearance: none; outline: none; transition: all 0.3s ease;">
+                            <option value="sandbox">🔵 Sandbox Environment (Testing)</option>
+                            <option value="production">🟢 Production Environment</option>
+                            <option value="staging">🟡 Staging Environment</option>
+                            <option value="eu-west">🇪🇺 EU West Region</option>
+                            <option value="us-east">🇺🇸 US East Region</option>
+                            <option value="asia-pacific">🌏 Asia Pacific Region</option>
+                        </select>
+                        <div class="dropdown-arrow" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #667eea;">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <p style="margin-top: 0.5rem; color: var(--gray); font-size: 0.9rem;">
+                        Choose the environment for your API keys. Sandbox keys are for testing only.
+                    </p>
+                </div>
+                
+                <!-- API Key Display -->
+                <div id="api-key-display" style="margin: 2rem 0;">
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; color: var(--dark);">Your API Key:</h4>
+                        <button id="copy-api-key" style="margin-left: auto; padding: 0.5rem 1rem; background: #e2e8f0; border: none; border-radius: 6px; cursor: pointer;">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="regenerate-key" style="margin-left: 0.5rem; padding: 0.5rem 1rem; background: #fed7d7; color: #c53030; border: none; border-radius: 6px; cursor: pointer;">
+                            <i class="fas fa-redo"></i> Regenerate
+                        </button>
+                    </div>
+                    
+                    <div class="api-key-box" style="background: #f7fafc; padding: 1rem; border-radius: 8px; border: 2px dashed #cbd5e0; font-family: 'Courier New', monospace; word-break: break-all;">
+                        <code id="api-key-text">gc_sandbox_sk_test_4eC39HqLyjWDarjtT1zdp7dc</code>
+                    </div>
+                    
+                    <!-- API Key Details -->
+                    <div class="api-key-details" style="margin-top: 1.5rem; padding: 1rem; background: #f0fff4; border-radius: 8px; border-left: 4px solid #48bb78;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #2f855a;">
+                            <i class="fas fa-info-circle"></i> API Key Details
+                        </h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <span style="color: var(--gray);">Environment:</span>
+                                <span id="env-display" style="font-weight: 600; color: #2f855a;">Sandbox</span>
+                            </div>
+                            <div>
+                                <span style="color: var(--gray);">Requests Today:</span>
+                                <span style="font-weight: 600; color: #2b6cb0;">0/10,000</span>
+                            </div>
+                            <div>
+                                <span style="color: var(--gray);">Created:</span>
+                                <span style="font-weight: 600;">Just now</span>
+                            </div>
+                            <div>
+                                <span style="color: var(--gray);">Status:</span>
+                                <span style="font-weight: 600; color: #38a169;">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- API Endpoint Dropdown -->
+                <div class="dropdown-group" style="margin: 2rem 0;">
+                    <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--dark);">
+                        Select API Endpoint:
+                    </label>
+                    <div class="dropdown-container" style="position: relative; display: inline-block; width: 400px;">
+                        <select id="api-endpoint" class="api-dropdown"
+                                style="width: 100%; padding: 1rem 1.5rem; font-size: 1rem; border: 2px solid #e2e8f0; border-radius: 10px; background: white; color: var(--dark); cursor: pointer; appearance: none; outline: none; transition: all 0.3s ease;">
+                            <option value="gaze-realtime">👁️ Real-time Gaze Tracking</option>
+                            <option value="heatmap-generate">🔥 Generate Heatmap</option>
+                            <option value="session-analytics">📊 Session Analytics</option>
+                            <option value="calibration">🎯 Calibration Endpoint</option>
+                            <option value="batch-process">⚡ Batch Processing</option>
+                            <option value="webhook-manage">🔔 Webhook Management</option>
+                        </select>
+                        <div class="dropdown-arrow" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #667eea;">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Code Example Display -->
+                <div id="code-example" style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem; color: var(--dark);">Code Example:</h4>
+                    <div style="background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace;">
+                        <pre id="code-snippet" style="margin: 0;">
+// JavaScript example for Real-time Gaze Tracking
+const gazeCloud = new GazeCloudAPI({
+    apiKey: 'YOUR_API_KEY',
+    environment: 'sandbox'
+});
+
+// Start gaze tracking
+gazeCloud.startTracking({
+    onGazeUpdate: (data) => {
+        console.log('Gaze coordinates:', data.x, data.y);
+        console.log('Confidence:', data.confidence);
+    },
+    onError: (error) => {
+        console.error('Tracking error:', error);
+    }
+});</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- API Reference Section -->
+        <div class="api-reference" style="margin: 4rem 0;">
+            <h3 style="margin-bottom: 2rem; color: var(--dark);">API Reference</h3>
+            <div class="products-grid">
+                <div class="product-card">
+                    <h3 class="product-title">Real-time API</h3>
+                    <div class="product-content">
+                        <p><strong>Endpoint:</strong> POST /api/v1/gaze/realtime</p>
+                        <p><strong>Description:</strong> Stream real-time gaze coordinates from webcam video.</p>
+                        <p><strong>Rate Limit:</strong> 100 requests/second</p>
+                        <p><strong>Response Time:</strong> &lt;50ms</p>
+                        <div class="product-description">
+                            Requires WebSocket connection or HTTP/2 streaming.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <h3 class="product-title">Analytics API</h3>
+                    <div class="product-content">
+                        <p><strong>Endpoint:</strong> POST /api/v1/analytics/heatmap</p>
+                        <p><strong>Description:</strong> Generate heatmaps from gaze data sessions.</p>
+                        <p><strong>Rate Limit:</strong> 10 requests/minute</p>
+                        <p><strong>Response Time:</strong> 1-5 seconds</p>
+                        <div class="product-description">
+                            Returns PNG/JSON heatmap data with fixation points.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <h3 class="product-title">Batch API</h3>
+                    <div class="product-content">
+                        <p><strong>Endpoint:</strong> POST /api/v1/batch/process</p>
+                        <p><strong>Description:</strong> Process multiple gaze recordings in batch.</p>
+                        <p><strong>Rate Limit:</strong> 5 requests/hour</p>
+                        <p><strong>Response Time:</strong> 30-300 seconds</p>
+                        <div class="product-description">
+                            For large-scale research studies and A/B testing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="cta-section" style="background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Ready to Scale with GazeCloud?</h2>
+            <p>Start with 10,000 free API calls per month. Upgrade as you grow.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary btn-lg">
+                    <i class="fas fa-key"></i> Get Free API Keys
+                </a>
+                <a href="#" class="btn btn-outline btn-lg">
+                    <i class="fas fa-file-contract"></i> View Pricing
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Font Awesome icons
+    const faScript = document.createElement('script');
+    faScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js';
+    document.head.appendChild(faScript);
+    
+    // API Environment Dropdown
+    const apiEnvDropdown = document.getElementById('api-environment');
+    const apiKeyText = document.getElementById('api-key-text');
+    const envDisplay = document.getElementById('env-display');
+    
+    // API keys for different environments
+    const apiKeys = {
+        sandbox: 'gc_sandbox_sk_test_4eC39HqLyjWDarjtT1zdp7dc',
+        production: 'gc_prod_sk_live_7xHqLyjW4eC39DarjtT1zdp7',
+        staging: 'gc_staging_sk_test_8aLzMjX5fD40KbmsuT2yeq8',
+        'eu-west': 'gc_eu_sk_live_9bMnKoY6gE51LcnsvT3zfr9',
+        'us-east': 'gc_us_sk_live_0cNoLpZ7hF62MdptwT4ags0',
+        'asia-pacific': 'gc_ap_sk_live_1dOpMqA8iG73NequxU5bht1'
+    };
+    
+    // Code examples for different endpoints
+    const codeExamples = {
+        'gaze-realtime': `// JavaScript example for Real-time Gaze Tracking
+const gazeCloud = new GazeCloudAPI({
+    apiKey: 'YOUR_API_KEY',
+    environment: 'sandbox'
+});
+
+// Start gaze tracking
+gazeCloud.startTracking({
+    onGazeUpdate: (data) => {
+        console.log('Gaze coordinates:', data.x, data.y);
+        console.log('Confidence:', data.confidence);
+    },
+    onError: (error) => {
+        console.error('Tracking error:', error);
+    }
+});`,
+        
+        'heatmap-generate': `// Python example for Heatmap Generation
+import requests
+import json
+
+api_key = "YOUR_API_KEY"
+url = "https://api.gazerecorder.com/v1/analytics/heatmap"
+
+headers = {
+    "Authorization": f"Bearer {api_key}",
+    "Content-Type": "application/json"
+}
+
+data = {
+    "session_id": "session_12345",
+    "width": 1920,
+    "height": 1080,
+    "format": "png",
+    "intensity": "medium"
+}
+
+response = requests.post(url, headers=headers, json=data)
+heatmap_url = response.json()["heatmap_url"]`,
+        
+        'session-analytics': `// Node.js example for Session Analytics
+const GazeCloud = require('gazecloud-sdk');
+
+const client = new GazeCloud({
+    apiKey: process.env.GAZECLOUD_API_KEY
+});
+
+async function getSessionAnalytics(sessionId) {
+    try {
+        const analytics = await client.sessions.retrieve(sessionId, {
+            include: ['fixations', 'saccades', 'heatmap']
+        });
+        console.log('Session duration:', analytics.duration);
+        console.log('Fixation count:', analytics.fixations.length);
+        console.log('Average saccade velocity:', analytics.metrics.avgSaccadeVelocity);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}`,
+        
+        'calibration': `// Calibration API example
+const calibration = gazeCloud.startCalibration({
+    points: 9,  // 9-point calibration
+    onPointStart: (pointIndex) => {
+        console.log(\`Calibrating point \${pointIndex}\`);
+    },
+    onPointComplete: (pointIndex, accuracy) => {
+        console.log(\`Point \${pointIndex} accuracy: \${accuracy}\`);
+    },
+    onComplete: (overallAccuracy) => {
+        console.log(\`Calibration complete! Accuracy: \${overallAccuracy}%\`);
+        if (overallAccuracy > 0.8) {
+            gazeCloud.startTracking();
+        }
+    }
+});`,
+        
+        'batch-process': `# Batch Processing - Python
+from gazecloud import GazeCloudClient
+import asyncio
+
+async def process_batch():
+    client = GazeCloudClient(api_key="YOUR_API_KEY")
+    
+    # Upload multiple recordings
+    batch = await client.batch.create(
+        name="User Study Batch 1",
+        recordings=[
+            "recording_1.mp4",
+            "recording_2.mp4",
+            "recording_3.mp4"
+        ]
+    )
+    
+    # Monitor progress
+    while batch.status != "completed":
+        await asyncio.sleep(5)
+        batch = await client.batch.retrieve(batch.id)
+        print(f"Progress: {batch.progress}%")
+    
+    # Download results
+    results = await client.batch.results(batch.id)
+    print(f"Processed {len(results)} recordings")`,
+        
+        'webhook-manage': `// Webhook Management - JavaScript
+const webhook = await gazeCloud.webhooks.create({
+    url: "https://your-app.com/gaze-webhook",
+    events: [
+        "gaze.session.completed",
+        "gaze.heatmap.generated",
+        "gaze.calibration.failed"
+    ],
+    secret: "your_webhook_secret"
+});
+
+console.log('Webhook created:', webhook.id);
+
+// Verify webhook signature
+function verifyWebhookSignature(payload, signature, secret) {
+    const crypto = require('crypto');
+    const expectedSignature = crypto
+        .createHmac('sha256', secret)
+        .update(payload)
+        .digest('hex');
+    return crypto.timingSafeEqual(
+        Buffer.from(signature),
+        Buffer.from(expectedSignature)
+    );
+}`
+    };
+    
+    // Update API key and environment display when dropdown changes
+    apiEnvDropdown.addEventListener('change', function() {
+        const selectedEnv = this.value;
+        const selectedText = this.options[this.selectedIndex].text;
+        
+        // Update API key
+        apiKeyText.textContent = apiKeys[selectedEnv];
+        
+        // Update environment display
+        const envText = selectedText.replace(/[🔵🟢🟡🇪🇺🇺🇸🌏]/g, '').trim();
+        envDisplay.textContent = envText.split(' (')[0];
+        
+        // Update color based on environment
+        const colors = {
+            sandbox: '#3182ce',
+            production: '#38a169',
+            staging: '#d69e2e',
+            'eu-west': '#805ad5',
+            'us-east': '#e53e3e',
+            'asia-pacific': '#dd6b20'
+        };
+        envDisplay.style.color = colors[selectedEnv];
+    });
+    
+    // API Endpoint Dropdown
+    const apiEndpointDropdown = document.getElementById('api-endpoint');
+    const codeSnippet = document.getElementById('code-snippet');
+    
+    apiEndpointDropdown.addEventListener('change', function() {
+        const selectedEndpoint = this.value;
+        codeSnippet.textContent = codeExamples[selectedEndpoint];
+    });
+    
+    // Copy API Key functionality
+    document.getElementById('copy-api-key').addEventListener('click', function() {
+        const apiKey = apiKeyText.textContent;
+        navigator.clipboard.writeText(apiKey).then(() => {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            this.style.background = '#c6f6d5';
+            this.style.color = '#22543d';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.background = '';
+                this.style.color = '';
+            }, 2000);
+        });
+    });
+    
+    // Regenerate API Key
+    document.getElementById('regenerate-key').addEventListener('click', function() {
+        if (confirm('Are you sure you want to regenerate this API key? The old key will be immediately invalidated.')) {
+            // Generate a new random key
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let newKey = 'gc_' + apiEnvDropdown.value + '_sk_';
+            for (let i = 0; i < 24; i++) {
+                newKey += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            apiKeyText.textContent = newKey;
+            
+            // Update stored key
+            apiKeys[apiEnvDropdown.value] = newKey;
+            
+            // Show success message
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-check"></i> Regenerated!';
+            this.style.background = '#c6f6d5';
+            this.style.color = '#22543d';
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.background = '';
+                this.style.color = '';
+            }, 2000);
+        }
+    });
+    
+    // Add some interactive styling to dropdowns
+    const dropdowns = document.querySelectorAll('.api-dropdown');
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('focus', function() {
+            this.style.borderColor = '#667eea';
+            this.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.1)';
+        });
+        
+        dropdown.addEventListener('blur', function() {
+            this.style.borderColor = '#e2e8f0';
+            this.style.boxShadow = 'none';
+        });
+        
+        dropdown.addEventListener('mouseenter', function() {
+            this.style.borderColor = '#cbd5e0';
+        });
+        
+        dropdown.addEventListener('mouseleave', function() {
+            if (document.activeElement !== this) {
+                this.style.borderColor = '#e2e8f0';
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Additional styles for GazeCloud page */
+    .api-dropdown:focus {
+        outline: none;
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+    }
+    
+    .dropdown-arrow {
+        transition: transform 0.3s ease;
+    }
+    
+    .api-dropdown:focus + .dropdown-arrow {
+        transform: translateY(-50%) rotate(180deg);
+    }
+    
+    .api-key-box:hover {
+        border-color: #667eea;
+        background: #edf2f7;
+    }
+    
+    #copy-api-key, #regenerate-key {
+        transition: all 0.2s ease;
+    }
+    
+    #copy-api-key:hover {
+        background: #cbd5e0;
+    }
+    
+    #regenerate-key:hover {
+        background: #fc8181;
+        color: white;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .dropdown-container {
+            width: 100% !important;
+        }
+        
+        .api-key-controls {
+            padding: 1.5rem !important;
+        }
+        
+        .api-key-details > div {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+{% endblock %}
